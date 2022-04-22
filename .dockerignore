@@ -1,0 +1,15 @@
+Dockerfile
+venv
+README.md
+
+.gitignore
+.github
+
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+.pytest_cache
+
+test*

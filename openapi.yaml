@@ -1,0 +1,61 @@
+# openapi.yaml
+swagger: "2.0"
+info:
+  title: "Trip API"
+  description: Simple API on API Gateway with a Cloud Run backend
+  version: 1.0.0
+  contact:
+    email: ewerton@ewerton.com.br
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+schemes:
+  - https
+x-google-backend:
+  address: https://trip-api-llzqobrpwa-uc.a.run.app
+
+paths:
+  /trip:
+    post:
+      summary: submit trip
+      operationId: submitTrip
+      description: Upload trip data to database
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: trip
+          description: Trip details
+          schema:
+            $ref: "#/definitions/Trip"
+      responses:
+        201:
+          description: trip created
+        400:
+          description: invalid input, object invalid
+definitions:
+  Trip:
+    type: object
+    required:
+      - region
+      - origin_coord
+      - destination_coord
+      - datetime
+      - datasource
+    properties:
+      region:
+        type: string
+        example: "Prague"
+      origin_coord:
+        type: string
+        example: "POINT (14.4973794438195 50.00136875782316)"
+      destination_coord:
+        type: string
+        example: "POINT (14.43109483523328 50.04052930943246)"
+      datetime:
+        type: string
+        example: "2018-05-28 09:03:40"
+      datasource:
+        type: string
+        example: "funny_car"

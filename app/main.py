@@ -21,7 +21,7 @@ def trip():
     for col in ["origin_coord", "destination_coord"]:
         try:
             content[col] = geojson.dumps(MyPoint(content[col]))
-        except (KeyError, ValueError, AttributeError) as e:
+        except (KeyError, ValueError, AttributeError, TypeError) as e:
             return "invalid input, object invalid", 400
     
     errors = bigquery.Client().insert_rows_json("ewerton-jobsity.jobsity.trips", [content])
